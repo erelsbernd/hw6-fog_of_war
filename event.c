@@ -1,5 +1,5 @@
 #include "event.h"
-#include "character.h"
+#include "character_t.h"
 
 static uint32_t next_event_number(void)
 {
@@ -53,7 +53,7 @@ void event_delete(void *e)
 
   switch (event->type) {
   case event_character_turn:
-    character_delete(event->c);
+      character_delete(event->c);
     break;
   }
 

@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "character.h"
+#include "character_t.h"
 #include "heap.h"
 #include "npc.h"
 #include "pc.h"

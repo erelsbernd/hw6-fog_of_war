@@ -28,9 +28,12 @@ typedef struct character_s {
   pc_t *pc;
 } character_t;
 
+void character_delete(void *v);
+
+uint32_t can_see(dungeon_t *d, Character *voyeur, Character *exhibitionist);
+
 int32_t compare_characters_by_next_turn(const void *character1,
                                         const void *character2);
-uint32_t can_see(dungeon_t *d, Character *voyeur, Character *exhibitionist);
-void character_delete(void *c);
+
 
 #endif

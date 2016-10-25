@@ -9,7 +9,7 @@
 #include "move.h"
 #include "npc.h"
 #include "pc.h"
-#include "character.h"
+#include "character_t.h"
 #include "Character.hpp"
 #include "utils.h"
 #include "path.h"

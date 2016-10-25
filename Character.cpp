@@ -15,11 +15,11 @@ extern "C" {
     return &c->position;
   }
   
-  int get_character_position_x(Character *c) {
+  int get_character_position_x(const Character *const c) {
     return c->position[dim_x];
   }
   
-  int get_character_position_y(Character *c) {
+  int get_character_position_y(const Character *const c) {
     return c->position[dim_y];
   }
   
@@ -33,8 +33,20 @@ extern "C" {
     return c->position[dim_y];
   }
   
+  npc_t* set_npc(Character *c, npc_t *npc) {
+    return c->npc = npc;
+  }
+  
   npc_t* get_npc(Character *c) {
     return c->npc;
+  }
+  
+  pc_t* set_pc(Character *c, pc_t *pc) {
+    return c->pc = pc;
+  }
+  
+  pc_t* get_pc(Character *c) {
+    return c->pc;
   }
   
   int is_alive(Character *c) {

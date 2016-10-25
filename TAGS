@@ -1,0 +1,31 @@
+
+Character.cpp,519
+  pair_t* get_pair_t(14,163
+  int get_character_position_x(18,232
+  int get_character_position_y(22,329
+  int set_character_position_x(26,426
+  int set_character_position_y(31,546
+  npc_t* set_npc(36,666
+  npc_t* get_npc(40,743
+  pc_t* set_pc(44,802
+  pc_t* get_pc(48,873
+  int is_alive(52,929
+  void set_alive(56,988
+  char set_symbol(60,1060
+  char get_symbol(64,1145
+  int32_t set_speed(68,1208
+  int32_t get_speed(72,1295
+  int32_t set_sequence_number(76,1359
+  int32_t get_sequence_number(80,1462
+
+Character.hpp,382
+#define Character_h10,167
+class Character 20,263
+  char symbol;Character::symbol22,289
+  pair_t position;Character::position23,304
+  int32_t speed;Character::speed24,323
+  uint32_t alive;Character::alive25,340
+  uint32_t sequence_number;Character::sequence_number26,358
+  npc_t *npc;Character::npc27,386
+  pc_t *pc;Character::pc28,400
+typedef void Character;34,451

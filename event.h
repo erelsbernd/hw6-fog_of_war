@@ -17,9 +17,7 @@ typedef struct event {
   event_type_t type;
   uint32_t time;
   uint32_t sequence;
-  union {
-    Character *c;
-  };
+  Character *c;
 } event_t;
 
 int32_t compare_events(const void *event1, const void *event2);

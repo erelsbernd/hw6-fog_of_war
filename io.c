@@ -307,15 +307,15 @@ static void io_list_monsters_display(dungeon_t *d,
 
   for (i = 0; i < count; i++) {
     snprintf(s[i], 40, "%16s%c: %2d %s by %2d %s",
-             (c[i]->symbol == 'd' ? "A tenacious " :
+             (set_symbol(c[i], 'd') ? "A tenacious " :
               adjectives[rand() % (sizeof (adjectives) /
                                    sizeof (adjectives[0]))]),
-             c[i]->symbol,
-             abs(c[i]->position[dim_y] - get_character_position_y(d->pc)),
-             ((c[i]->position[dim_y] - get_character_position_y(d->pc)) <= 0 ?
+             get_symbol(c[i]),
+             abs(get_character_position_y(c[i]) - get_character_position_y(d->pc)),
+             ((get_character_position_y(c[i]) - get_character_position_y(d->pc)) <= 0 ?
               "North" : "South"),
-             abs(c[i]->position[dim_x] - get_character_position_x(d->pc)),
-             ((c[i]->position[dim_x] - get_character_position_x(d->pc)) <= 0 ?
+             abs(get_character_position_x(c[i]) - get_character_position_x(d->pc)),
+             ((get_character_position_x(c[i]) - get_character_position_x(d->pc)) <= 0 ?
               "East" : "West"));
     if (count <= 13) {
       /* Handle the non-scrolling case right here. *
@@ -344,8 +344,8 @@ static int compare_monster_distance(const void *v1, const void *v2)
   const Character *const *c1 = v1;
   const Character *const *c2 = v2;
 
-  return (dungeon->pc_distance[(*c1)->position[dim_y]][(*c1)->position[dim_x]] -
-          dungeon->pc_distance[(*c2)->position[dim_y]][(*c2)->position[dim_x]]);
+  return (dungeon->pc_distance[get_character_position_y(*c1)][get_character_position_x(*c1)] -
+          dungeon->pc_distance[get_character_position_y(*c2)][get_character_position_x(*c2)]);
 }
 
 static void io_list_monsters(dungeon_t *d)

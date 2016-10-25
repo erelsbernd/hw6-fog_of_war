@@ -3,7 +3,7 @@
 #include "utils.h"
 #include "npc.h"
 #include "dungeon.h"
-#include "character.h"
+#include "character_t.h"
 #include "move.h"
 #include "path.h"
 #include "event.h"

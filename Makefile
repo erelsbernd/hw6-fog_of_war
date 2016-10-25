@@ -8,7 +8,7 @@ CXXFLAGS = -Wall -ggdb -funroll-loops
 LDFLAGS = -lncurses
 
 BIN = rlg327
-OBJS = rlg327.o dungeon.o heap.o utils.o path.o character.o pc.o npc.o \
+OBJS = Character.o rlg327.o dungeon.o heap.o utils.o path.o character_t.o pc.o npc.o \
        move.o event.o io.o
 
 all: $(BIN) etags
@@ -39,4 +39,4 @@ clobber: clean
 
 etags:
 	@$(ECHO) Updating TAGS
-	@etags *.[ch]
+	@etags *.[ch][p][p]

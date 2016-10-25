@@ -4,7 +4,7 @@
 # include "heap.h"
 # include "macros.h"
 # include "dims.h"
-# include "character.h"
+# include "character_t.h"
 # include "Character.hpp"
 
 #define DUNGEON_X              80

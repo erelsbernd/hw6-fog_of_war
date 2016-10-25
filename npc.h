@@ -44,6 +44,8 @@
 
 #ifndef __cplusplus
 typedef void Character;
+#else //__cplusplus
+class Character;
 #endif //__cplusplus
 
 typedef struct dungeon dungeon_t;
