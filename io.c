@@ -156,7 +156,7 @@ void io_display(dungeon_t *d)
   for (y = 0; y < DUNGEON_Y; y++) {
     for (x = 0; x < DUNGEON_X; x++) {
       if (d->character[y][x]) {
-        mvaddch(y + 1, x, d->character[y][x]->symbol);
+        mvaddch(y + 1, x, get_symbol(d->character[y][x]));
       } else {
         switch (mapxy(x, y)) {
         case ter_wall:
@@ -212,16 +212,16 @@ uint32_t io_teleport_pc(dungeon_t *d)
     dest[dim_y] = rand_range(1, DUNGEON_Y - 2);
   } while (charpair(dest));
 
-  d->character[d->pc.position[dim_y]][d->pc.position[dim_x]] = NULL;
+  d->character[get_character_position_y(d->pc)][get_character_position_x(d->pc)] = NULL;
   d->character[dest[dim_y]][dest[dim_x]] = &d->pc;
 
-  d->pc.position[dim_y] = dest[dim_y];
-  d->pc.position[dim_x] = dest[dim_x];
+  set_character_position_y(d->pc, dest[dim_y]);
+  set_character_position_x(d->pc, dest[dim_x]);
 
   if (mappair(dest) < ter_floor) {
     mappair(dest) = ter_floor;
   }
-
+ 
   dijkstra(d);
   dijkstra_tunnel(d);
 
@@ -291,7 +291,7 @@ static void io_scroll_monster_list(char (*s)[40], uint32_t count)
 }
 
 static void io_list_monsters_display(dungeon_t *d,
-                                     character_t **c,
+                                     Character **c,
                                      uint32_t count)
 {
   uint32_t i;
@@ -311,11 +311,11 @@ static void io_list_monsters_display(dungeon_t *d,
               adjectives[rand() % (sizeof (adjectives) /
                                    sizeof (adjectives[0]))]),
              c[i]->symbol,
-             abs(c[i]->position[dim_y] - d->pc.position[dim_y]),
-             ((c[i]->position[dim_y] - d->pc.position[dim_y]) <= 0 ?
+             abs(c[i]->position[dim_y] - get_character_position_y(d->pc)),
+             ((c[i]->position[dim_y] - get_character_position_y(d->pc)) <= 0 ?
               "North" : "South"),
-             abs(c[i]->position[dim_x] - d->pc.position[dim_x]),
-             ((c[i]->position[dim_x] - d->pc.position[dim_x]) <= 0 ?
+             abs(c[i]->position[dim_x] - get_character_position_x(d->pc)),
+             ((c[i]->position[dim_x] - get_character_position_x(d->pc)) <= 0 ?
               "East" : "West"));
     if (count <= 13) {
       /* Handle the non-scrolling case right here. *
@@ -341,8 +341,8 @@ static void io_list_monsters_display(dungeon_t *d,
 
 static int compare_monster_distance(const void *v1, const void *v2)
 {
-  const character_t *const *c1 = v1;
-  const character_t *const *c2 = v2;
+  const Character *const *c1 = v1;
+  const Character *const *c2 = v2;
 
   return (dungeon->pc_distance[(*c1)->position[dim_y]][(*c1)->position[dim_x]] -
           dungeon->pc_distance[(*c2)->position[dim_y]][(*c2)->position[dim_x]]);
@@ -350,7 +350,7 @@ static int compare_monster_distance(const void *v1, const void *v2)
 
 static void io_list_monsters(dungeon_t *d)
 {
-  character_t **c;
+  Character **c;
   uint32_t x, y, count;
 
   c = malloc(d->num_monsters * sizeof (*c));

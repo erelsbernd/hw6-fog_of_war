@@ -171,10 +171,13 @@ int main(int argc, char *argv[])
             usage(argv[0]);
           }
           do_place_pc = 1;
-          if ((d.pc.position[dim_y] = atoi(argv[++i])) < 1 ||
-              d.pc.position[dim_y] > DUNGEON_Y - 2         ||
-              (d.pc.position[dim_x] = atoi(argv[++i])) < 1 ||
-              d.pc.position[dim_x] > DUNGEON_X - 2) {
+            
+          int bool_1 = set_character_position_y(d.pc, atoi(argv[++i])) < 1;
+          int bool_2 = get_character_position_y(d.pc) > DUNGEON_Y - 2;
+          int bool_3 = set_character_position_x(d.pc, atoi(argv[++i])) < 1;
+          int bool_4 = get_character_position_x(d.pc) > DUNGEON_X - 2;
+          
+          if ((bool_1 || bool_2) || (bool_3 || bool_4)) {
             fprintf(stderr, "Invalid PC position.\n");
             usage(argv[0]);
           }
@@ -228,9 +231,9 @@ int main(int argc, char *argv[])
     write_dungeon(&d);
   }
 
-  printf(pc_is_alive(&d) ? victory : tombstone);
+  printf("%s", pc_is_alive(&d) ? victory : tombstone);
 
-  pc_delete(d.pc.pc);
+  pc_delete(d.pc);
   delete_dungeon(&d);
 
   return 0;

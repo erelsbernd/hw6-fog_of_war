@@ -5,6 +5,7 @@
 # include "macros.h"
 # include "dims.h"
 # include "character.h"
+# include "Character.hpp"
 
 #define DUNGEON_X              80
 #define DUNGEON_Y              21
@@ -46,7 +47,9 @@ typedef struct room {
   uint32_t connected;
 } room_t;
 
-typedef struct character character_t;
+#ifndef __cplusplus
+typedef void Character;
+#endif //__cplusplus
 
 typedef struct dungeon {
   uint32_t num_rooms;
@@ -63,8 +66,8 @@ typedef struct dungeon {
   uint8_t hardness[DUNGEON_Y][DUNGEON_X];
   uint8_t pc_distance[DUNGEON_Y][DUNGEON_X];
   uint8_t pc_tunnel[DUNGEON_Y][DUNGEON_X];
-  character_t *character[DUNGEON_Y][DUNGEON_X];
-  character_t pc;
+  Character *character[DUNGEON_Y][DUNGEON_X];
+  Character *pc;
   heap_t events;
   uint16_t num_monsters;
   uint16_t max_monsters;

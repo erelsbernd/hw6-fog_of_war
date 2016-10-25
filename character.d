@@ -1,2 +1,2 @@
-character.o: character.c character.h dims.h heap.h npc.h pc.h dungeon.h \
-  macros.h
+character.o: character.c character.h dims.h Character.hpp npc.h pc.h \
+  heap.h dungeon.h macros.h

@@ -9,19 +9,19 @@
 void character_delete(void *v)
 {
   /* The PC is never malloc()ed anymore, do don't attempt to free it here. */
-  character_t *c;
+  Character *c;
 
   if (v) {
     c = v;
 
-    if (c->npc) {
-      npc_delete(c->npc);
+    if (get_npc(c)) {
+      npc_delete(get_npc(c));
       free(c);
     }
   }
 }
 
-uint32_t can_see(dungeon_t *d, character_t *voyeur, character_t *exhibitionist)
+uint32_t can_see(dungeon_t *d, Character *voyeur, Character *exhibitionist)
 {
   /* Application of Bresenham's Line Drawing Algorithm.  If we can draw *
    * a line from v to e without intersecting any walls, then v can see  *
@@ -35,10 +35,10 @@ uint32_t can_see(dungeon_t *d, character_t *voyeur, character_t *exhibitionist)
   pair_t del, f;
   int16_t a, b, c, i;
 
-  first[dim_x] = voyeur->position[dim_x];
-  first[dim_y] = voyeur->position[dim_y];
-  second[dim_x] = exhibitionist->position[dim_x];
-  second[dim_y] = exhibitionist->position[dim_y];
+  first[dim_x] = get_character_position_x(voyeur);
+  first[dim_y] = get_character_position_y(voyeur);
+  second[dim_x] = get_character_position_y(exhibitionist);
+  second[dim_y] = get_character_position_y(exhibitionist);
 
   if ((abs(first[dim_x] - second[dim_x]) > VISUAL_RANGE) ||
       (abs(first[dim_y] - second[dim_y]) > VISUAL_RANGE)) {

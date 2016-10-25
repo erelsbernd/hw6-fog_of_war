@@ -4,13 +4,14 @@
 # include <stdint.h>
 
 # include "dims.h"
+#include "Character.hpp"
 
 typedef struct dungeon dungeon_t;
 typedef struct npc npc_t;
 typedef struct pc pc_t;
 typedef struct dice_t dice_t;
 
-typedef struct character {
+typedef struct character_s {
   char symbol;
   pair_t position;
   int32_t speed;
@@ -29,7 +30,7 @@ typedef struct character {
 
 int32_t compare_characters_by_next_turn(const void *character1,
                                         const void *character2);
-uint32_t can_see(dungeon_t *d, character_t *voyeur, character_t *exhibitionist);
+uint32_t can_see(dungeon_t *d, Character *voyeur, Character *exhibitionist);
 void character_delete(void *c);
 
 #endif

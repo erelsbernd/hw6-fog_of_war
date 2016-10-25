@@ -5,7 +5,9 @@
 
 # include "dungeon.h"
 
-typedef struct character character_t;
+#ifndef __cplusplus
+typedef void Character;
+#endif //__cplusplus
 
 typedef enum event_type {
   event_character_turn,
@@ -16,7 +18,7 @@ typedef struct event {
   uint32_t time;
   uint32_t sequence;
   union {
-    character_t *c;
+    Character *c;
   };
 } event_t;
 
