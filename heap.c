@@ -317,7 +317,7 @@ int heap_decrease_key_no_replace(heap_t *h, heap_node_t *n)
 
   heap_node_t *p;
 
-  p = n->parent;
+  p = n->parent;  
 
   if (p && (h->compare(n->datum, p->datum) < 0)) {
     heap_cut(h, n, p);

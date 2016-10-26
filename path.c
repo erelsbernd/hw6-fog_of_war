@@ -2,11 +2,11 @@
 #include "dungeon.h"
 
 /* Ugly hack: There is no way to pass a pointer to the dungeon into the *
- * heap's comparitor funtion without modifying the heap.  Copying the   *
+ * heap's comparator funtion without modifying the heap.  Copying the   *
  * pc_distance array is a possible solution, but that doubles the       *
  * bandwidth requirements for dijkstra, which would also be bad.        *
  * Instead, make a global pointer to the dungeon in this file,          *
- * initialize it in dijkstra, and use it in the comparitor to get to    *
+ * initialize it in dijkstra, and use it in the comparator to get to    *
  * pc_distance.  Otherwise, pretend it doesn't exist, because it really *
  * is ugly.                                                             */
 static dungeon_t *dungeon;
@@ -75,8 +75,7 @@ void dijkstra(dungeon_t *d)
          d->pc_distance[c->pos[dim_y]][c->pos[dim_x]] + 1)) {
       d->pc_distance[c->pos[dim_y] - 1][c->pos[dim_x] - 1] =
         d->pc_distance[c->pos[dim_y]][c->pos[dim_x]] + 1;
-      heap_decrease_key_no_replace(&h,
-                                   p[c->pos[dim_y] - 1][c->pos[dim_x] - 1].hn);
+      heap_decrease_key_no_replace(&h, p[c->pos[dim_y] - 1][c->pos[dim_x] - 1].hn);
     }
     if ((p[c->pos[dim_y] - 1][c->pos[dim_x]    ].hn) &&
         (d->pc_distance[c->pos[dim_y] - 1][c->pos[dim_x]    ] >

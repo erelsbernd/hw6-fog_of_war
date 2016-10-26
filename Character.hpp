@@ -43,6 +43,8 @@ extern "C" {
   
   // C code here
   //something to get and set pc->position[dim_x] and [dim_y]
+  
+  Character* malloc_character();
   pair_t* get_pair_t(Character *c);
   int get_character_position_x(const Character *const c);
   int get_character_position_y(const Character *const c);

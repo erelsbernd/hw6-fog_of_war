@@ -91,6 +91,7 @@ int main(int argc, char *argv[])
   do_seed = 1;
   save_file = NULL;
   d.max_monsters = 10;
+  d.pc = malloc_character(); //(Character*) malloc(sizeof(Character));
 
   /* The project spec requires '--load' and '--save'.  It's common  *
    * to have short and long forms of most switches (assuming you    *
@@ -201,7 +202,7 @@ int main(int argc, char *argv[])
   printf("Seed is %ld.\n", seed);
   srand(seed);
 
-  io_init_terminal();
+  //io_init_terminal();
   init_dungeon(&d);
 
   if (do_load) {
@@ -213,6 +214,7 @@ int main(int argc, char *argv[])
   }
 
   config_pc(&d);
+  io_init_terminal();
   gen_monsters(&d);
 
   io_display(&d);

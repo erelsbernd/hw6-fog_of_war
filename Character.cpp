@@ -10,6 +10,20 @@ extern "C" {
 #endif //__cplusplus
   
   
+  Character* malloc_character() {
+    Character* temp = (Character*) malloc(sizeof(Character));
+    printf("Malloc returns address#: %lu\n", (long)temp);
+    fflush( stdout );
+    return temp;
+//                  sizeof(char) +
+//                  sizeof(pair_t) +
+//                  sizeof(int32_t) +
+//                  sizeof(uint32_t) +
+//                  sizeof(uint32_t) +
+//                  sizeof(npc_t) +
+//                  sizeof(pc_t)
+//                  );
+  }
   
   pair_t* get_pair_t(Character *c) {
     return &c->position;
@@ -62,6 +76,7 @@ extern "C" {
   }
   
   char get_symbol(Character *c) {
+    printf("THE VALUE OF CHARACTER IN GET_SYMBOL IS :%lu", (long)c); fflush( stdout );
     return c->symbol;
   }
   
