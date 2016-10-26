@@ -37,10 +37,12 @@ void place_pc(dungeon_t *d)
 
 void config_pc(dungeon_t *d)
 {
-  Character* temp_c = malloc_character();
-  //printf("pc.c (41) temp_c: %lu", (long)d->pc); fflush( stdout );
+  //Character* temp = (Character*) malloc(sizeof(Character));
+  Character* temp_c = calloc(1, get_character_size() ); //malloc_character();
+  
+  printf("pc.c (41) temp_c: %lu", (long)d->pc); fflush( stdout );
   d->pc = temp_c;
-  //printf("pc.c (44) p->c:%lu", (long)d->pc); fflush( stdout );
+  printf("pc.c (44) p->c:%lu\n", (long)d->pc); fflush( stdout );
   //memset(&d->pc, 0, sizeof (d->pc));
   //printf("pc.c (44) p->c:%lu", (long)d->pc); fflush( stdout );
   
