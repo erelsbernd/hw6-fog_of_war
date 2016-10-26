@@ -28,16 +28,21 @@ void do_combat(dungeon_t *d, Character *atk, Character *def)
 
 void move_character(dungeon_t *d, Character *c, pair_t next)
 {
-  if (charpair(next) &&
-      ((next[dim_y] != get_character_position_y(c)) ||
-       (next[dim_x] != get_character_position_x(c)))) {
+  int cy = get_character_position_y(c);
+  int cx = get_character_position_x(c);
+  if (charpair(next) && ((next[dim_y] != cy ) || (next[dim_x] != cx ))) {
+    if (charpair(next)) {
+      printf("Attack from: y= %d, x= %d - ", cy, cx);
+      printf("Defend at  : y= %d, x= %d\n", next[dim_y], next[dim_x]); fflush( stdout );
+    }
+    
     do_combat(d, c, charpair(next));
   }
 
-  d->character[get_character_position_y(c)][get_character_position_x(c)] = NULL;
+  d->character[cy][cx] = NULL;
   set_character_position_y(c, next[dim_y]);
   set_character_position_x(c, next[dim_x]);
-  d->character[get_character_position_y(c)][get_character_position_x(c)] = c;
+  d->character[cy][cx] = c;
 }
 
 void do_moves(dungeon_t *d)

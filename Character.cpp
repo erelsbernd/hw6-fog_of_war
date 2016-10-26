@@ -124,7 +124,7 @@ extern "C" {
     //printf("THE VALUE OF CHARACTER IN GET_SYMBOL IS :%lu", (long)c); fflush( stdout );
     if (c) { return c->symbol; }
     printf("NULL C IN Character.cpp:106:set_symbol\n");  fflush( stdout );
-    return NULL;
+    return ' ';
   }
   
   int32_t set_speed(Character *c, int32_t speed) {
