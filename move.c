@@ -18,6 +18,8 @@
 
 void do_combat(dungeon_t *d, Character *atk, Character *def)
 {
+  if (!atk) { printf("NULL ATK IN move.c:21:do_combat\n"); fflush( stdout ); }
+  if (!def) { printf("NULL DEF IN move.c:22:do_combat\n"); fflush( stdout ); }
   set_alive(def,0);
   if (def != &d->pc) {
     d->num_monsters--;

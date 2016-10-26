@@ -234,6 +234,7 @@ int main(int argc, char *argv[])
   }
 
   printf("%s", pc_is_alive(&d) ? victory : tombstone);
+  fflush( stdout );
 
   pc_delete(d.pc);
   delete_dungeon(&d);

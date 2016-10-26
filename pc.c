@@ -38,11 +38,11 @@ void place_pc(dungeon_t *d)
 void config_pc(dungeon_t *d)
 {
   //Character* temp = (Character*) malloc(sizeof(Character));
-  Character* temp_c = calloc(1, get_character_size() ); //malloc_character();
+  Character* temp_c = malloc_character();// calloc(1, get_character_size() ); //malloc_character();
   
-  printf("pc.c (41) temp_c: %lu", (long)d->pc); fflush( stdout );
+  //printf("pc.c (41) temp_c: %lu\n", (long)temp_c); fflush( stdout );
   d->pc = temp_c;
-  printf("pc.c (44) p->c:%lu\n", (long)d->pc); fflush( stdout );
+  //printf("pc.c (44) p->c:%lu\n", (long)d->pc); fflush( stdout );
   //memset(&d->pc, 0, sizeof (d->pc));
   //printf("pc.c (44) p->c:%lu", (long)d->pc); fflush( stdout );
   
@@ -51,6 +51,7 @@ void config_pc(dungeon_t *d)
   place_pc(d);
 
   set_speed(d->pc, PC_SPEED);
+  if (!d->pc) { printf("NULL d->pc IN pc.c:54:config.pc\n"); fflush( stdout ); }
   set_alive(d->pc, 1);
   set_sequence_number(d->pc, 0);
   pc_t* temp_pc = calloc(1, sizeof (*get_pc(d)));

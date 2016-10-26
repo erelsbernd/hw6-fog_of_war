@@ -26,7 +26,7 @@ void gen_monsters(dungeon_t *d)
   d->num_monsters = d->max_monsters;
 
   for (i = 0; i < d->num_monsters; i++) {
-    m = calloc(1, sizeof (*m));
+    m = malloc_character();//calloc(1, sizeof (*m));
     //memset(m, 0, sizeof (*m));
 
     do {
@@ -42,6 +42,7 @@ void gen_monsters(dungeon_t *d)
     set_character_position_x(m, p[dim_x]);
     d->character[p[dim_y]][p[dim_x]] = m;
     set_speed(m, rand_range(5, 20));
+    if (!m) { printf("NULL m IN npc.c:45:gen_monsters\n"); fflush( stdout ); }
     set_alive(m, 1);
     set_sequence_number(m, ++d->character_sequence_number);
     set_pc(m, NULL);
