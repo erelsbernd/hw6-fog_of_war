@@ -26,7 +26,7 @@ event_t *new_event(dungeon_t *d, event_type_t t, void *v, uint32_t delay)
 {
   event_t *e;
 
-  e = malloc(sizeof (*e));
+  e = calloc(1, sizeof (*e));
 
   e->type = t;
   e->time = d->time + delay;

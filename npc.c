@@ -26,8 +26,8 @@ void gen_monsters(dungeon_t *d)
   d->num_monsters = d->max_monsters;
 
   for (i = 0; i < d->num_monsters; i++) {
-    m = malloc(sizeof (*m));
-    memset(m, 0, sizeof (*m));
+    m = calloc(1, sizeof (*m));
+    //memset(m, 0, sizeof (*m));
 
     do {
       room = rand_range(1, d->num_rooms - 1);
@@ -45,7 +45,7 @@ void gen_monsters(dungeon_t *d)
     set_alive(m, 1);
     set_sequence_number(m, ++d->character_sequence_number);
     set_pc(m, NULL);
-    set_npc(m, malloc(sizeof (npc_t)));
+    set_npc(m, calloc(1, sizeof (npc_t)));
     get_npc(m)->characteristics = rand() & 0x0000000f;
     set_symbol(m, symbol[get_npc(m)->characteristics]);
     get_npc(m)->have_seen_pc = 0;

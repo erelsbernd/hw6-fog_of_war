@@ -18,6 +18,9 @@ void character_delete(void *v)
       npc_delete(get_npc(c));
       free(c);
     }
+    else {
+      free(c);
+    }
   }
 }
 
