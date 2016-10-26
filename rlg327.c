@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
   do_seed = 1;
   save_file = NULL;
   d.max_monsters = 10;
-  d.pc = malloc_character(); //(Character*) malloc(sizeof(Character));
+  //d.pc = malloc_character(); //(Character*) malloc(sizeof(Character));
 
   /* The project spec requires '--load' and '--save'.  It's common  *
    * to have short and long forms of most switches (assuming you    *

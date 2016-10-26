@@ -1,23 +1,23 @@
 
-Character.cpp,563
-  Character* malloc_character(13,160
-  pair_t* get_pair_t(25,532
-  int get_character_position_x(29,601
-  int get_character_position_y(33,698
-  int set_character_position_x(37,795
-  int set_character_position_y(42,915
-  npc_t* set_npc(47,1035
-  npc_t* get_npc(51,1112
-  pc_t* set_pc(55,1171
-  pc_t* get_pc(59,1242
-  int is_alive(63,1298
-  void set_alive(67,1357
-  char set_symbol(71,1429
-  char get_symbol(75,1514
-  int32_t set_speed(79,1577
-  int32_t get_speed(83,1664
-  int32_t set_sequence_number(87,1728
-  int32_t get_sequence_number(91,1831
+Character.cpp,564
+  Character* malloc_character(15,201
+  pair_t* get_pair_t(30,681
+  int get_character_position_x(34,750
+  int get_character_position_y(38,847
+  int set_character_position_x(42,944
+  int set_character_position_y(47,1064
+  npc_t* set_npc(52,1184
+  npc_t* get_npc(56,1261
+  pc_t* set_pc(60,1320
+  pc_t* get_pc(64,1391
+  int is_alive(68,1447
+  void set_alive(72,1506
+  char set_symbol(76,1578
+  char get_symbol(80,1663
+  int32_t set_speed(85,1813
+  int32_t get_speed(89,1900
+  int32_t set_sequence_number(93,1964
+  int32_t get_sequence_number(97,2067
 
 Character.hpp,382
 #define Character_h10,167
