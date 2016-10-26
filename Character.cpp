@@ -12,6 +12,10 @@ extern "C" {
 #endif //__cplusplus
   
   
+  int get_character_size() {
+    return sizeof(Character);
+  }
+  
   Character* malloc_character() {
     Character* temp = (Character*) malloc(sizeof(Character));
     printf("Malloc returns address#: %lu\n", (long)temp);
