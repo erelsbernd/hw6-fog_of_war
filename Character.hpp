@@ -45,13 +45,13 @@ extern "C" {
   //something to get and set pc->position[dim_x] and [dim_y]
   
   int get_character_size();
-  Character* malloc_character();
+  Character* calloc_character();
   pair_t* get_pair_t(Character *c);
   int get_character_position_x(const Character *const c);
   int get_character_position_y(const Character *const c);
   int set_character_position_x(Character *c, int x);
   int set_character_position_y(Character *c, int y);
-  void set_alive(Character *c, int alive);
+  int set_alive(Character *c, int alive);
   int is_alive(Character *c);
   char set_symbol(Character *c, char symbol);
   char get_symbol(Character *c);

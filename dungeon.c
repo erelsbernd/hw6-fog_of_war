@@ -949,7 +949,7 @@ void new_dungeon(dungeon_t *d)
   place_pc(d);
   int cy = get_character_position_y(d->pc);
   int cx = get_character_position_x(d->pc);
-  d->character[cy][cx] = &d->pc;
+  d->character[cy][cx] = d->pc;
 
   gen_monsters(d);
 }

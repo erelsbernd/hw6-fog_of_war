@@ -26,7 +26,7 @@ void gen_monsters(dungeon_t *d)
   d->num_monsters = d->max_monsters;
 
   for (i = 0; i < d->num_monsters; i++) {
-    m = malloc_character();//calloc(1, sizeof (*m));
+    m = calloc_character();//calloc(1, sizeof (*m));
     //memset(m, 0, sizeof (*m));
 
     do {
@@ -319,7 +319,7 @@ void npc_next_pos_gradient(dungeon_t *d, Character *c, pair_t next)
 static void npc_next_pos_00(dungeon_t *d, Character *c, pair_t next)
 {
   /* not smart; not telepathic; not tunneling; not erratic */
-  if (can_see(d, c, &d->pc)) {
+  if (can_see(d, c, d->pc)) {
     get_npc(c)->pc_last_known_position[dim_y] = get_character_position_y(d->pc);
     get_npc(c)->pc_last_known_position[dim_x] = get_character_position_x(d->pc);
     npc_next_pos_line_of_sight(d, c, next);
@@ -331,7 +331,7 @@ static void npc_next_pos_00(dungeon_t *d, Character *c, pair_t next)
 static void npc_next_pos_01(dungeon_t *d, Character *c, pair_t next)
 {
   /*     smart; not telepathic; not tunneling; not erratic */
-  if (can_see(d, c, &d->pc)) {
+  if (can_see(d, c, d->pc)) {
     get_npc(c)->pc_last_known_position[dim_y] = get_character_position_y(d->pc);
     get_npc(c)->pc_last_known_position[dim_x] = get_character_position_x(d->pc);
     get_npc(c)->have_seen_pc = 1;
@@ -363,7 +363,7 @@ static void npc_next_pos_03(dungeon_t *d, Character *c, pair_t next)
 static void npc_next_pos_04(dungeon_t *d, Character *c, pair_t next)
 {
   /* not smart; not telepathic;     tunneling; not erratic */
-  if (can_see(d, c, &d->pc)) {
+  if (can_see(d, c, d->pc)) {
     get_npc(c)->pc_last_known_position[dim_y] = get_character_position_y(d->pc);
     get_npc(c)->pc_last_known_position[dim_x] = get_character_position_x(d->pc);
     npc_next_pos_line_of_sight(d, c, next);
@@ -375,7 +375,7 @@ static void npc_next_pos_04(dungeon_t *d, Character *c, pair_t next)
 static void npc_next_pos_05(dungeon_t *d, Character *c, pair_t next)
 {
   /*     smart; not telepathic;     tunneling; not erratic */
-  if (can_see(d, c, &d->pc)) {
+  if (can_see(d, c, d->pc)) {
     get_npc(c)->pc_last_known_position[dim_y] = get_character_position_y(d->pc);
     get_npc(c)->pc_last_known_position[dim_x] = get_character_position_x(d->pc);
     get_npc(c)->have_seen_pc = 1;

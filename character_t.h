@@ -9,7 +9,6 @@
 typedef struct dungeon dungeon_t;
 typedef struct npc npc_t;
 typedef struct pc pc_t;
-typedef struct dice_t dice_t;
 
 typedef struct character_s {
   char symbol;

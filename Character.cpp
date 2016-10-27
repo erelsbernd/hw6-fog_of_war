@@ -16,29 +16,41 @@ extern "C" {
     return sizeof(Character);
   }
   
-  Character* malloc_character() {
+  Character* calloc_character() {
+    printf("size of Character = %lu\n", sizeof(Character));
     Character* temp = (Character*) calloc(1, sizeof(Character));
-    printf("Malloc returns address#: %lu\n", (long)temp); fflush( stdout );
+    printf("size of calloc C = %lu\n", sizeof(*temp));
     
-//    class Character {
-//    public:
-//      char symbol;
-//      pair_t position;
-//      int32_t speed;
-//      uint32_t alive;
-//      uint32_t sequence_number;
-//      npc_t *npc;
-//      pc_t *pc;
+    temp->symbol = 'Q';
+    printf("char symbol %c\n", temp->symbol);
+    temp->position[dim_y] = -1;
+    printf("pair_t[dim_y] = %hhd\n", temp->position[dim_y]);
+    temp->position[dim_x] = -1;
+    printf("pair_t[dim_x] = %hhd\n", temp->position[dim_x]);
+    
+    temp->speed = -1;
+    printf("speed = %d\n", temp->speed);
+    temp->alive = -1;
+    printf("alive = %d\n", temp->alive);
+    temp->sequence_number = -1;
+    printf("sequence_numver = %d\n", temp->sequence_number);
+    temp->npc = NULL;
+    printf("NPC = %lu\n", (unsigned long)temp->npc);
+    temp->pc = NULL;
+    printf("PC = %lu\n", (unsigned long)temp->pc);
+    
+    
+    
+    printf("Calloc returns address#: %lu\n", (long)temp); fflush( stdout );
+    
+    
+//    class Character { char symbol; pair_t position; int32_t speed;
+//      uint32_t alive; uint32_t sequence_number; npc_t *npc; pc_t *pc;
     
     return temp;
-//                  sizeof(char) +
-//                  sizeof(pair_t) +
-//                  sizeof(int32_t) +
-//                  sizeof(uint32_t) +
-//                  sizeof(uint32_t) +
-//                  sizeof(npc_t) +
-//                  sizeof(pc_t)
-//                  );
+    
+//   sizeof(char) + sizeof(pair_t) + sizeof(int32_t) + sizeof(uint32_t) +
+//                  sizeof(uint32_t) + sizeof(npc_t) + sizeof(pc_t) );
   }
   
   pair_t* get_pair_t(Character *c) {
@@ -109,13 +121,14 @@ extern "C" {
     return 0;
   }
   
-  void set_alive(Character *c, int alive){
-    if (c) { c->alive = alive; }
-    printf("NULL C IN Character.cpp:101:set_alive\n"); fflush( stdout );
+  int set_alive(Character *c, int alive){
+    if (c) { return c->alive = alive; }
+    printf("NULL C IN Character.cpp:112:set_alive\n"); fflush( stdout );
+    return 0;
   }
   
   char set_symbol(Character *c, char symbol) {
-    if (c) { return c->symbol = symbol; }
+    if (c) { return c->symbol = symbol; return symbol; }
     printf("NULL C IN Character.cpp:106:set_symbol\n"); fflush( stdout );
     return ' ';
   }

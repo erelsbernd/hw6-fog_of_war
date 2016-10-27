@@ -38,13 +38,13 @@ void place_pc(dungeon_t *d)
 void config_pc(dungeon_t *d)
 {
   //Character* temp = (Character*) malloc(sizeof(Character));
-  Character* temp_c = malloc_character();// calloc(1, get_character_size() ); //malloc_character();
+  Character* temp_c = calloc_character();// calloc(1, get_character_size() ); //calloc_character();
   
   //printf("pc.c (41) temp_c: %lu\n", (long)temp_c); fflush( stdout );
   d->pc = temp_c;
   //printf("pc.c (44) p->c:%lu\n", (long)d->pc); fflush( stdout );
-  //memset(&d->pc, 0, sizeof (d->pc));
-  //printf("pc.c (44) p->c:%lu", (long)d->pc); fflush( stdout );
+  //memset(d->pc, 0, sizeof (*d->pc));
+  //printf("pc.c (44) p->c:%lu\n", (long)d->pc); fflush( stdout );
   
   set_symbol(d->pc, '@');
 
@@ -60,10 +60,12 @@ void config_pc(dungeon_t *d)
 
   int py = get_character_position_y(d->pc);
   int px = get_character_position_x(d->pc);
-  d->character[py][px] = &d->pc;
-
+  d->character[py][px] = d->pc;
+  
   dijkstra(d);
+  printf("pc.c (65)dijsktra p->c:%lu\n", (long)d->pc); fflush( stdout );
   dijkstra_tunnel(d);
+  printf("pc.c (67)dijsktra_tunnel p->c:%lu\n", (long)d->pc); fflush( stdout );
 }
 
 /* Not used anymore, but leaving it here because you could *
@@ -75,7 +77,7 @@ uint32_t pc_next_pos(dungeon_t *d, pair_t dir)
   /* Tunnel to the nearest dungeon corner, then move around in hopes *
    * of killing a couple of monsters before we die ourself.          */
 
-  if (in_corner(d, &d->pc)) {
+  if (in_corner(d, d->pc)) {
     /*
     dir[dim_x] = (mapxy(d->pc->position[dim_x] - 1,
                         d->pc->position[dim_y]) ==
@@ -85,7 +87,7 @@ uint32_t pc_next_pos(dungeon_t *d, pair_t dir)
                         get_character_position_y(d->pc) - 1) ==
                   ter_wall_immutable) ? 1 : -1;
   } else {
-    dir_nearest_wall(d, &d->pc, dir);
+    dir_nearest_wall(d, d->pc, dir);
   }
 
   return 0;

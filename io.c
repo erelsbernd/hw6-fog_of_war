@@ -213,7 +213,7 @@ uint32_t io_teleport_pc(dungeon_t *d)
   } while (charpair(dest));
 
   d->character[get_character_position_y(d->pc)][get_character_position_x(d->pc)] = NULL;
-  d->character[dest[dim_y]][dest[dim_x]] = &d->pc;
+  d->character[dest[dim_y]][dest[dim_x]] = d->pc;
 
   set_character_position_y(d->pc, dest[dim_y]);
   set_character_position_x(d->pc, dest[dim_x]);
@@ -358,7 +358,7 @@ static void io_list_monsters(dungeon_t *d)
   /* Get a linear list of monsters */
   for (count = 0, y = 1; y < DUNGEON_Y - 1; y++) {
     for (x = 1; x < DUNGEON_X - 1; x++) {
-      if (d->character[y][x] && d->character[y][x] != &d->pc) {
+      if (d->character[y][x] && d->character[y][x] != d->pc) {
         c[count++] = d->character[y][x];
       }
     }

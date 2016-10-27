@@ -21,7 +21,7 @@ void do_combat(dungeon_t *d, Character *atk, Character *def)
   if (!atk) { printf("NULL ATK IN move.c:21:do_combat\n"); fflush( stdout ); }
   if (!def) { printf("NULL DEF IN move.c:22:do_combat\n"); fflush( stdout ); }
   set_alive(def,0);
-  if (def != &d->pc) {
+  if (def != d->pc) {
     d->num_monsters--;
   }
 }
@@ -33,7 +33,7 @@ void move_character(dungeon_t *d, Character *c, pair_t next)
   if (charpair(next) && ((next[dim_y] != cy ) || (next[dim_x] != cx ))) {
     if (charpair(next)) {
       printf("Attack from: y= %d, x= %d - ", cy, cx);
-      printf("Defend at  : y= %d, x= %d\n", next[dim_y], next[dim_x]); fflush( stdout );
+      printf("    Died at: y= %d, x= %d\n", next[dim_y], next[dim_x]); fflush( stdout );
     }
     
     do_combat(d, c, charpair(next));
@@ -48,7 +48,7 @@ void move_character(dungeon_t *d, Character *c, pair_t next)
 void do_moves(dungeon_t *d)
 {
   pair_t next;
-  Character *c;
+  Character *c = NULL;
   event_t *e;
 
   /* Remove the PC when it is PC turn.  Replace on next call.  This allows *
@@ -67,15 +67,15 @@ void do_moves(dungeon_t *d)
     /* 1.05: I'm still trying to figure out what the right solution *
      * to this is.  I've come up with several ugly hacks that fix   *
      * it, but there must be a better way...                        */
-    e->time = d->time + (1000 / get_speed(d->pc));
+    e->time = d->time + (1000 / 10); //get_speed(d->pc) //PC speed is 10. weird 0 errors
     e->sequence = 0;
-    e->c = &d->pc;
+    e->c = d->pc;
     heap_insert(&d->events, e);
   }
 
   while (pc_is_alive(d) &&
          (e = heap_remove_min(&d->events)) &&
-         ((e->type != event_character_turn) || (e->c != &d->pc))) {
+         ((e->type != event_character_turn) || (e->c != d->pc))) {
     d->time = e->time;
     if (e->type == event_character_turn) {
       c = e->c;
@@ -84,7 +84,7 @@ void do_moves(dungeon_t *d)
       if (d->character[get_character_position_y(c)][get_character_position_x(c)] == c) {
         d->character[get_character_position_y(c)][get_character_position_x(c)] = NULL;
       }
-      if (c != &d->pc) {
+      if (c != d->pc) {
         event_delete(e);
       }
       continue;
@@ -97,7 +97,7 @@ void do_moves(dungeon_t *d)
   }
 
   io_display(d);
-  if (pc_is_alive(d) && e->c == &d->pc) {
+  if (pc_is_alive(d) && e->c == d->pc) {
     c = e->c;
     d->time = e->time;
     /* Kind of kludgey, but because the PC is never in the queue when   *
@@ -213,7 +213,7 @@ uint32_t move_pc(dungeon_t *d, uint32_t dir)
   }
 
   if ((dir != '>') && (dir != '<') && (mappair(next) >= ter_floor)) {
-    move_character(d, &d->pc, next);
+    move_character(d, d->pc, next);
     dijkstra(d);
     dijkstra_tunnel(d);
 
