@@ -7,7 +7,7 @@
 
 typedef struct dungeon dungeon_t;
 
-typedef struct pc {
+typedef struct pc_s {
 } pc_t;
 
 void pc_delete(pc_t *pc);

@@ -3,8 +3,8 @@ CXX = g++
 ECHO = echo
 RM = rm -f
 
-CFLAGS = -Wall -ggdb -funroll-loops -D_DARWIN_SOURCE
-CXXFLAGS = -Wall -ggdb -funroll-loops
+CFLAGS = -Wall -Werror -ggdb -funroll-loops -D_DARWIN_SOURCE
+CXXFLAGS = -Wall -Werror -ggdb -funroll-loops
 LDFLAGS = -lncurses
 
 BIN = rlg327
