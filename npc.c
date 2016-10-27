@@ -42,7 +42,7 @@ void gen_monsters(dungeon_t *d)
     set_character_position_x(m, p[dim_x]);
     d->character[p[dim_y]][p[dim_x]] = m;
     set_speed(m, rand_range(5, 20));
-    if (!m) { printf("NULL m IN npc.c:45:gen_monsters\n"); fflush( stdout ); }
+    //if (!m) { printf("NULL m IN npc.c:45:gen_monsters\n"); fflush( stdout ); }
     set_alive(m, 1);
     set_sequence_number(m, ++d->character_sequence_number);
     set_pc(m, NULL);

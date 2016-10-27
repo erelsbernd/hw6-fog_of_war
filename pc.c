@@ -51,7 +51,7 @@ void config_pc(dungeon_t *d)
   place_pc(d);
 
   set_speed(d->pc, PC_SPEED);
-  if (!d->pc) { printf("NULL d->pc IN pc.c:54:config.pc\n"); fflush( stdout ); }
+  //if (!d->pc) { printf("NULL d->pc IN pc.c:54:config.pc\n"); fflush( stdout ); }
   set_alive(d->pc, 1);
   set_sequence_number(d->pc, 0);
   pc_t* temp_pc = calloc(1, sizeof (*get_pc(d)));
@@ -63,9 +63,9 @@ void config_pc(dungeon_t *d)
   d->character[py][px] = d->pc;
   
   dijkstra(d);
-  printf("pc.c (65)dijsktra p->c:%lu\n", (long)d->pc); fflush( stdout );
+  //printf("pc.c (65)dijsktra p->c:%lu\n", (long)d->pc); fflush( stdout );
   dijkstra_tunnel(d);
-  printf("pc.c (67)dijsktra_tunnel p->c:%lu\n", (long)d->pc); fflush( stdout );
+  //printf("pc.c (67)dijsktra_tunnel p->c:%lu\n", (long)d->pc); fflush( stdout );
 }
 
 /* Not used anymore, but leaving it here because you could *

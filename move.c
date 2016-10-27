@@ -18,8 +18,8 @@
 
 void do_combat(dungeon_t *d, Character *atk, Character *def)
 {
-  if (!atk) { printf("NULL ATK IN move.c:21:do_combat\n"); fflush( stdout ); }
-  if (!def) { printf("NULL DEF IN move.c:22:do_combat\n"); fflush( stdout ); }
+  //if (!atk) { printf("NULL ATK IN move.c:21:do_combat\n"); fflush( stdout ); }
+  //if (!def) { printf("NULL DEF IN move.c:22:do_combat\n"); fflush( stdout ); }
   set_alive(def,0);
   if (def != d->pc) {
     d->num_monsters--;
@@ -31,10 +31,8 @@ void move_character(dungeon_t *d, Character *c, pair_t next)
   int cy = get_character_position_y(c);
   int cx = get_character_position_x(c);
   if (charpair(next) && ((next[dim_y] != cy ) || (next[dim_x] != cx ))) {
-    if (charpair(next)) {
-      printf("Attack from: y= %d, x= %d - ", cy, cx);
-      printf("    Died at: y= %d, x= %d\n", next[dim_y], next[dim_x]); fflush( stdout );
-    }
+    //printf("Attack from: y= %d, x= %d - ", cy, cx);
+    //printf("    Died at: y= %d, x= %d\n", next[dim_y], next[dim_x]); fflush( stdout );
     
     do_combat(d, c, charpair(next));
   }

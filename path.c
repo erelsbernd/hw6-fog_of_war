@@ -147,7 +147,6 @@ void dijkstra_tunnel(dungeon_t *d)
   /* Currently assumes that monsters only move on floors.  Will *
    * need to be modified for tunneling and pass-wall monsters.  */
   
-  printf("0\n"); fflush(stdout);
   heap_t h;
   uint32_t x, y;
   int size;
@@ -182,7 +181,6 @@ void dijkstra_tunnel(dungeon_t *d)
     }
   }
   
-  printf("1"); fflush(stdout);
   size = h.size;
   while ((c = heap_remove_min(&h))) {
     if (--size != h.size) {
@@ -196,10 +194,10 @@ void dijkstra_tunnel(dungeon_t *d)
       d->pc_tunnel[c->pos[dim_y] - 1][c->pos[dim_x] - 1] =
         (d->pc_tunnel[c->pos[dim_y]][c->pos[dim_x]] +
          tunnel_movement_cost(c->pos[dim_x], c->pos[dim_y]));
-          printf("4\n"); fflush(stdout);
+          //printf("4\n"); fflush(stdout);
       heap_decrease_key_no_replace(&h,
                                    p[c->pos[dim_y] - 1][c->pos[dim_x] - 1].hn);
-          printf("5\n"); fflush(stdout);
+          //printf("5\n"); fflush(stdout);
     }
     if ((p[c->pos[dim_y] - 1][c->pos[dim_x]    ].hn) &&
         (d->pc_tunnel[c->pos[dim_y] - 1][c->pos[dim_x]    ] >
